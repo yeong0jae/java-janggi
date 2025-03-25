@@ -10,8 +10,6 @@ import java.util.Map;
 
 public final class Board {
 
-    private static final int START_SCORE = 72;
-    
     private final Map<Coordinate, Piece> board;
 
     public Board() {
@@ -89,8 +87,8 @@ public final class Board {
     }
 
     public int calculateScoreByCountry(Country country) {
-        return START_SCORE - board.values().stream()
-                .filter(piece -> piece.getCountry() != country)
+        return board.values().stream()
+                .filter(piece -> piece.getCountry() == country)
                 .mapToInt(Piece::getScore)
                 .sum();
     }
