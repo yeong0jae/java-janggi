@@ -7,12 +7,8 @@ import domain.board.Board;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
 public class ByeongTest {
 
@@ -89,29 +85,6 @@ public class ByeongTest {
         List<Coordinate> availableMovePositions = byeong.availableMovePositions(new Coordinate(8, 4), board);
 
         assertThat(availableMovePositions.contains(new Coordinate(9, 5))).isTrue();
-    }
-
-    @DisplayName("병은 궁성 영역에서 대각선을 따라 이동할 수 있다")
-    @ParameterizedTest
-    @MethodSource("byeongFromTo")
-    void byeongTest7(Coordinate from, Coordinate to) {
-        Byeong byeong = new Byeong(Country.HAN);
-        Map<Coordinate, Piece> pieces = new HashMap<>();
-        pieces.put(from, byeong);
-        Board board = new Board(pieces);
-
-        List<Coordinate> availableMovePositions = byeong.availableMovePositions(from, board);
-
-        assertThat(availableMovePositions.contains(to)).isTrue();
-    }
-
-    static Stream<Arguments> byeongFromTo() {
-        return Stream.of(
-                Arguments.of(new Coordinate(8, 4), new Coordinate(9, 5)),
-                Arguments.of(new Coordinate(8, 6), new Coordinate(9, 5)),
-                Arguments.of(new Coordinate(10, 4), new Coordinate(9, 5)),
-                Arguments.of(new Coordinate(10, 6), new Coordinate(9, 5))
-        );
     }
 
     @DisplayName("병은 궁성 영역에서 대각선을 따라 이동할 수 있다_궁성의 중앙")
