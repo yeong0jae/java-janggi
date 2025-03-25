@@ -22,4 +22,8 @@ abstract public class Piece {
     public PieceType getType() {
         return type;
     }
+
+    public int getScore() {
+        return type.getScore();
+    }
 }

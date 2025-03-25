@@ -21,6 +21,7 @@ public class JanggiGame {
 
         while (true) {
             takeTurn(board, this::movePiece);
+            showScore(board);
             nextTurn();
         }
     }
@@ -48,6 +49,13 @@ public class JanggiGame {
         Coordinate to = retryUntilValid(inputView::readMoveTo);
 
         board.movePiece(from, to);
+    }
+
+    private void showScore(Board board) {
+        int hanScore = board.calculateScoreByCountry(Country.HAN);
+        int choScore = board.calculateScoreByCountry(Country.CHO);
+
+        outputView.printScore(hanScore, choScore);
     }
 
     private void nextTurn() {

@@ -163,4 +163,32 @@ class BoardTest {
         }
     }
 
+    @Nested
+    class boardScoreTest {
+
+        @DisplayName("초나라의 궁, 사만 남았을 때 한나라 점수를 계산한다.")
+        @Test
+        void calculateHanScoreTest() {
+            Map<Coordinate, Piece> pieces = new HashMap<>();
+            pieces.put(new Coordinate(9, 5), new Gung(Country.CHO));
+            pieces.put(new Coordinate(0, 4), new Sa(Country.CHO));
+            pieces.put(new Coordinate(0, 6), new Sa(Country.CHO));
+            Board board = new Board(pieces);
+
+            assertThat(board.calculateScoreByCountry(Country.HAN)).isEqualTo(66);
+        }
+
+        @DisplayName("한나라의 궁, 사만 남았을 때 초나라 점수를 계산한다.")
+        @Test
+        void calculateChoScoreTest() {
+            Map<Coordinate, Piece> pieces = new HashMap<>();
+            pieces.put(new Coordinate(2, 5), new Byeong(Country.HAN));
+            pieces.put(new Coordinate(1, 4), new Byeong(Country.HAN));
+            pieces.put(new Coordinate(1, 6), new Byeong(Country.HAN));
+            Board board = new Board(pieces);
+
+            assertThat(board.calculateScoreByCountry(Country.CHO)).isEqualTo(66);
+        }
+    }
+
 }
